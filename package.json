@@ -1,0 +1,36 @@
+{
+  "name": "ga4-team-chat",
+  "version": "1.0.0",
+  "description": "Ask questions about your Google Analytics data in plain English. Get instant insights powered by Claude AI.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "google-analytics",
+    "ga4",
+    "claude",
+    "ai",
+    "chatbot",
+    "analytics"
+  ],
+  "author": "INVOCOD Technologies",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
+    "@google-analytics/data": "^4.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -19,6 +19,7 @@ app.use(
         scriptSrc: [
           "'self'",
           "'unsafe-inline'",
+          "'unsafe-eval'",
           "https://unpkg.com",
           "https://cdn.jsdelivr.net",
         ],
