@@ -85,8 +85,8 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 // ─── API Routes ───────────────────────────────────────────
 
-// Health check
-app.get("/api/health", (req, res) => {
+// Health check (with auth if token is configured)
+app.get("/api/health", authMiddleware, (req, res) => {
   res.json({
     status: "ok",
     property: process.env.GA4_PROPERTY_ID || "not set",
