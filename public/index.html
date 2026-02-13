@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GA4 Team Chat — Analytics Intelligence</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -81,6 +82,13 @@
       align-items: center;
       justify-content: center;
       font-size: 18px;
+      padding: 6px;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .logo-text {
@@ -411,6 +419,13 @@
       font-size: 36px;
       margin-bottom: 20px;
       box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
+      padding: 14px;
+    }
+
+    .welcome-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .welcome h1 {
@@ -634,7 +649,9 @@
     <!-- Auth Screen -->
     <div v-if="requiresAuth && !authenticated" class="auth-screen">
       <div class="auth-box">
-        <div class="logo-icon" style="margin: 0 auto 12px; width: 48px; height: 48px; font-size: 24px;">📊</div>
+        <div class="logo-icon" style="margin: 0 auto 12px; width: 48px; height: 48px; font-size: 24px; padding: 10px;">
+          <img src="logo.svg" alt="GA4 Logo" />
+        </div>
         <h2>GA4 Team Chat</h2>
         <p>Enter your team access token to continue</p>
         <input
@@ -655,8 +672,10 @@
       <aside class="sidebar">
         <div class="sidebar-header">
           <div class="logo">
-            <div class="logo-icon">📊</div>
-            <span class="logo-text">GA4 Chat</span>
+            <div class="logo-icon">
+              <img src="logo.svg" alt="GA4 Logo" />
+            </div>
+            <span class="logo-text">Financing Analytics</span>
           </div>
           <div class="logo-sub">Analytics Intelligence</div>
           <div class="status-badge" v-if="connected">
@@ -679,14 +698,14 @@
 
         <div class="sidebar-footer">
           Property: <strong>{{ propertyId }}</strong><br/>
-          <span style="opacity:0.6">Powered by Claude AI + GA4</span>
+          <span style="opacity:0.6">Powered by Manafa</span>
         </div>
       </aside>
 
       <!-- Chat Area -->
       <main class="main">
         <div class="chat-header">
-          <h2>💬 Analytics Chat</h2>
+          <h2>💬 Chat</h2>
           <span class="property-badge">Property: {{ propertyId }}</span>
         </div>
 
@@ -694,7 +713,9 @@
         <div class="messages" ref="messagesContainer">
           <!-- Welcome screen -->
           <div v-if="messages.length === 0" class="welcome">
-            <div class="welcome-icon">📊</div>
+            <div class="welcome-icon">
+              <img src="logo.svg" alt="GA4 Logo" />
+            </div>
             <h1>Ask anything about your analytics</h1>
             <p>I'll query your Google Analytics data and give you insights in plain language. Just type your question below.</p>
 
