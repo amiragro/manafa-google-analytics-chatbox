@@ -119,6 +119,8 @@ async function processQuery(message, history = [], isFormatting = false) {
     }
   } catch (err) {
     console.error("[Groq Error]", err.message);
+    console.error("Full Groq error:", err);
+    console.error("Stack:", err.stack);
 
     if (err.message.includes("API") || err.message.includes("key")) {
       return {

@@ -156,6 +156,8 @@ app.post("/api/chat", authMiddleware, async (req, res) => {
     });
   } catch (err) {
     console.error("[Chat Error]", err.message);
+    console.error("Full error:", err);
+    console.error("Stack trace:", err.stack);
     res.status(500).json({
       error: "Failed to process your query. Please try again.",
       details: process.env.NODE_ENV === "development" ? err.message : undefined,

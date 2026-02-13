@@ -121,6 +121,8 @@ async function queryGA4(params) {
     };
   } catch (err) {
     console.error("[GA4 Error]", err.message);
+    console.error("Full GA4 error:", err);
+    console.error("Stack:", err.stack);
 
     if (err.message.includes("permission")) {
       throw new Error(
