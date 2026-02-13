@@ -9,10 +9,30 @@ let analyticsClient = null;
 function getClient() {
   if (analyticsClient) return analyticsClient;
 
+  // Try to use credentials from environment variable first (for Docker/Railway)
+  const credentialsJson = process.env.GA_CREDENTIALS_JSON;
+
+  if (credentialsJson) {
+    try {
+      const credentials = JSON.parse(credentialsJson);
+      const auth = new GoogleAuth({
+        credentials,
+        scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
+      });
+      analyticsClient = new BetaAnalyticsDataClient({ auth });
+      console.log("✅ Using GA credentials from GA_CREDENTIALS_JSON environment variable");
+      return analyticsClient;
+    } catch (err) {
+      console.error("Failed to parse GA_CREDENTIALS_JSON:", err.message);
+      throw new Error("Invalid GA_CREDENTIALS_JSON format");
+    }
+  }
+
+  // Fallback to file path (for local development)
   const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
   if (!credentialsPath) {
     throw new Error(
-      "GOOGLE_APPLICATION_CREDENTIALS environment variable not set"
+      "Neither GA_CREDENTIALS_JSON nor GOOGLE_APPLICATION_CREDENTIALS is set"
     );
   }
 
@@ -22,6 +42,7 @@ function getClient() {
   });
 
   analyticsClient = new BetaAnalyticsDataClient({ auth });
+  console.log("✅ Using GA credentials from file:", credentialsPath);
   return analyticsClient;
 }
 
