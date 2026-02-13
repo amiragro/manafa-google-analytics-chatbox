@@ -1,11 +1,29 @@
 require("dotenv").config();
+
+// ─── Environment Validation ─────────────────────────────
+const provider = process.env.AI_PROVIDER || "gemini";
+const requiredEnv = ["GOOGLE_APPLICATION_CREDENTIALS", "GA4_PROPERTY_ID"];
+
+if (provider.toLowerCase() === "groq") {
+  requiredEnv.push("GROQ_API_KEY");
+} else {
+  requiredEnv.push("GEMINI_API_KEY");
+}
+
+const missing = requiredEnv.filter((key) => !process.env[key]);
+if (missing.length > 0) {
+  console.error(`\nMissing required environment variables:\n  ${missing.join("\n  ")}\n`);
+  console.error("Copy .env.example to .env and fill in all required values.\n");
+  process.exit(1);
+}
+
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
 const { queryGA4 } = require("./ga4");
-const { processQuery } = require("./claude");
+const { processQuery } = require("./ai");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
