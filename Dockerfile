@@ -18,7 +18,7 @@ RUN mkdir -p ./credentials
 # Create startup script that writes GA credentials from env var
 RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'if [ -n "$GA_CREDENTIALS_JSON" ]; then' >> /app/start.sh && \
-    echo '  echo "$GA_CREDENTIALS_JSON" > ./credentials/ga-credentials.json' >> /app/start.sh && \
+    echo '  printf "%s" "$GA_CREDENTIALS_JSON" > ./credentials/ga-credentials.json' >> /app/start.sh && \
     echo '  echo "✅ GA credentials written from environment"' >> /app/start.sh && \
     echo 'fi' >> /app/start.sh && \
     echo 'node server/index.js' >> /app/start.sh && \
